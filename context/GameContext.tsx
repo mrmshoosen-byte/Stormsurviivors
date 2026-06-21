@@ -142,10 +142,6 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
           console.error('Error refreshing holders:', error);
         }
       }, 15000); // Every 15 seconds
-
-      return () => {
-        clearInterval(refreshInterval);
-      };
     } catch (error) {
       console.error('Failed to initialize live mode:', error);
       setIsConnected(false);
