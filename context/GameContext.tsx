@@ -21,7 +21,7 @@ interface GameContextType {
   triggerStorm: () => void;
   buySurvivor: (amount: number) => void;
   setTokenAddress: (address: string) => void;
-  initializeLiveMode: (tokenAddress: string) => Promise<void>;
+  initializeLiveMode: (tokenAddress: string) => Promise<void> | void;
 }
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
@@ -62,7 +62,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [isStormActive]);
 
   // Initialize live mode with real Solana data
-  const initializeLiveMode = useCallback(async (tokenAddr: string) => {
+  const initializeLiveMode = useCallback(async (tokenAddr: string): Promise<void> => {
     if (!isValidTokenAddress(tokenAddr)) {
       console.error('Invalid token address');
       setIsConnected(false);
